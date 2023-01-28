@@ -16,11 +16,11 @@ commands:
       steps:
         - run: 
              name: commands to install ansible
-             command:
+             command: |
                sudo apt update 
                sudo apt install software-properties-common -y
                sudo apt-get install ansible -y 
-               
+
                ansible --version   ##check
 
 
