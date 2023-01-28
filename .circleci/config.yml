@@ -193,7 +193,6 @@ jobs:
               "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].[PublicIpAddress]' \
               --output text)
-            echo $BACKEND_PUBLIC_IP
             echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventory.txt
             cat .circleci/ansible/inventory.txt
     
@@ -202,25 +201,24 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       - destroy-environment
-      # Here's where you will add some code to rollback on failure      
-#   configure-infrastructure:
-#     docker:
-#       # Docker image here that supports Ansible
-#     steps:
-#       # Checkout code from git
-#       # Add ssh keys with fingerprint
-#       # attach workspace
-#       - run:
-#           name: Install dependencies
-#           command: |
-#             # Your code here
-#             exit 1
-#       - run:
-#           name: Configure server
-#           command: |
-#             # Your code here
-#             exit 1
-#       # Here's where you will add some code to rollback on failure      
+  
+  configure-infrastructure:
+    docker:
+      - image: cimge/base:stable
+    steps:
+      - checkout
+      - install_ansible 
+      - add_ssh_keys:
+          fingerprints: ["63:f1:24:c1:d3:a8:bd:30:1c:08:ba:fb:0f:bb:f9:1f"]
+      - attach_workspace:
+         at : ~/
+      - run:
+          name: Install dependencies
+          command: |
+            cd .circleci/ansible
+            cat invenyory.txt ##to be deleted
+            ansible-playbook -i inventory.txt configure-server.yml
+      - destroy-environment
 
 #   run-migrations:
 #     docker:
@@ -353,8 +351,8 @@ workflows:
           filters:
             branches:
               only: [master]
-#       - configure-infrastructure:
-#           requires: [deploy-infrastructure]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
 #       - run-migrations:
 #           requires: [configure-infrastructure]
 #       - deploy-frontend:
