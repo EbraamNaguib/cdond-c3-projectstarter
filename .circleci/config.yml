@@ -19,10 +19,10 @@ commands:
              command:
                sudo apt update -y
                sudo apt upgrade -y
-               sudo apt install software-properties-common
+               sudo apt -y install software-properties-common
                sudo apt-add-repository -y ppa:ansible/ansible
                sudo apt update -y
-               sudo apt install ansible -y 
+               sudo apt-get install ansible -y 
                ansible --version   ##check
 
 
