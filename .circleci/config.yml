@@ -204,7 +204,7 @@ jobs:
   
   configure-infrastructure:
     docker:
-      - image: cimge/base:stable
+      - image: cimg/base:stable
     steps:
       - checkout
       - install_ansible 
