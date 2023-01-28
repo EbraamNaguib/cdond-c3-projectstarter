@@ -190,7 +190,7 @@ jobs:
               ec2 describe-instances \
               --filters \
               "Name=instance-state-name,Values=running" \
-              "Name=tag:Name,Values=backend" \
+#              "Name=tag:Name,Values=backend" \
               --query 'Reservations[*].Instances[*].[PublicIpAddress]' \
               --output text }
             echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventory.txt
