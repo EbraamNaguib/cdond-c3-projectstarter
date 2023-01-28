@@ -17,13 +17,18 @@ commands:
         - run: 
              name: commands to install ansible
              command:
-               sudo apt update
-               sudo apt upgrade
-               sudo apt install software-properties-common
-               sudo add-apt-repository --yes --update ppa:ansible/ansible
-               sudo apt install ansible
-
-
+              #  sudo apt update
+              #  sudo apt upgrade
+              #  sudo apt install software-properties-common
+              #  sudo add-apt-repository --yes --update ppa:ansible/ansible
+              #  sudo apt install ansible
+              sudo apt remove ansible
+              sudo apt --purge autoremove
+              sudo apt update
+              sudo apt upgrade
+              sudo apt -y install software-properties-common
+              sudo apt-add-repository ppa:ansible/ansible
+              sudo apt install ansible
 
 
     destroy-environment:
@@ -207,7 +212,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - install_awscli
+      - install_awscli  ##this step must exist at the begining to enable destory command to be run 
       - install_ansible 
       - add_ssh_keys:
           fingerprints: ["63:f1:24:c1:d3:a8:bd:30:1c:08:ba:fb:0f:bb:f9:1f"]
