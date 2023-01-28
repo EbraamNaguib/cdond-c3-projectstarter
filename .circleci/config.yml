@@ -17,18 +17,17 @@ commands:
         - run: 
              name: commands to install ansible
              command:
-              #  sudo apt update
-              #  sudo apt upgrade
-              #  sudo apt install software-properties-common
-              #  sudo add-apt-repository --yes --update ppa:ansible/ansible
-              #  sudo apt install ansible
-              sudo apt remove ansible
-              sudo apt --purge autoremove
-              sudo apt update
-              sudo apt upgrade
-              sudo apt -y install software-properties-common
-              sudo apt-add-repository ppa:ansible/ansible
-              sudo apt install ansible
+               sudo apt update
+               sudo apt install software-properties-common
+               sudo add-apt-repository --yes --update ppa:ansible/ansible
+               sudo apt install ansible
+              # sudo apt remove ansible
+              # sudo apt --purge autoremove
+              # sudo apt update
+              # sudo apt upgrade
+              # sudo apt -y install software-properties-common
+              # sudo apt-add-repository ppa:ansible/ansible
+              # sudo apt install ansible
 
 
     destroy-environment:
