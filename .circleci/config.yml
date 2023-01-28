@@ -20,8 +20,8 @@ commands:
                sudo apt update
                sudo apt upgrade
                sudo apt install software-properties-common
-               sudo apt-add-repository ppa:ansible/ansible
-               sudo apt update
+               sudo add-apt-repository --yes --update ppa:ansible/ansible
+               sudo apt install ansible
 
 
 
@@ -208,6 +208,7 @@ jobs:
     steps:
       - checkout
       - install_ansible 
+      - install_awscli
       - add_ssh_keys:
           fingerprints: ["63:f1:24:c1:d3:a8:bd:30:1c:08:ba:fb:0f:bb:f9:1f"]
       - attach_workspace:
