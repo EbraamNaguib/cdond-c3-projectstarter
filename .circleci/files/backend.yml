@@ -34,4 +34,4 @@ Resources:
       ImageId: ami-00874d747dde814fa   ##ubuntu 22.04 us-east-1  #ami-068663a3c619dd892 
       Tags:
         - Key: Name
-          Value: backend
+          Value: backend-${ID}
