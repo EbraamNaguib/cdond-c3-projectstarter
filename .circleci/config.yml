@@ -16,11 +16,11 @@ commands:
       steps:
         - run: 
              name: commands to install ansible
-             command: |
+             command: | 
                sudo apt update 
                sudo apt install software-properties-common -y
+               sudo apt-add-repository --yes --update ppa:ansible/ansible
                sudo apt-get install ansible -y 
-
                ansible --version   ##check
 
 
@@ -216,6 +216,7 @@ jobs:
           command: |
             cd .circleci/ansible
             cat inventory.txt ##to be deleted
+            ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i inventory.txt configure-server.yml
 #      - destroy-environment
 
