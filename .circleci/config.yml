@@ -44,6 +44,7 @@ commands:
       parameters:
         Workflow_ID:
           type: string 
+          default: ${CIRCLE_WORKFLOW_ID:0:7}
       steps:
         - run:
             name: Revert migrations
@@ -55,7 +56,7 @@ commands:
               then
                 cd ~/project/backend
                 npm install
-                npm run migration:revert #  Add revert code here. You can find this in the Getting Started section.
+                npm run migration:revert #  Addd revert code here. You can find this in the Getting Started section.
               fi
             
 jobs:
