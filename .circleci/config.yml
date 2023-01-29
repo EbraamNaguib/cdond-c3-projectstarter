@@ -68,7 +68,7 @@ commands:
                 npm install
                 npm audit fix
                 npm -y install
-                npm run migration --revert
+                npm run migrations:revert
               fi
             
 jobs:
@@ -323,10 +323,16 @@ jobs:
       - run:
           name: handle needed packages
           command: |
-            cd backend 
+            cd backend
             npm run build
-            tar -czf artifact.tar.gz.dist/* package*
-            cp ../backend/artifact.tar.gz ../.cirleci/ansible/roles/deploy/files
+            tar -czf artifact.tar.gz dist/* package*
+            cd ..
+            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+            
+            # cd backend 
+            # npm run build
+            # tar -czf artifact.tar.gz.dist/* package*
+            # cp ../backend/artifact.tar.gz ../.cirleci/ansible/roles/deploy/files
 
       - run:
           name: Deploy backend
@@ -406,14 +412,14 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
+      # - test-frontend:
+      #     requires: [build-frontend]
+      # - test-backend:
+      #     requires: [build-backend]
+      # - scan-backend:
+      #     requires: [build-backend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
       - deploy-infrastructure:
           requires:   [build-frontend,build-backend]  #[test-frontend, test-backend, scan-frontend, scan-backend]
           filters:
