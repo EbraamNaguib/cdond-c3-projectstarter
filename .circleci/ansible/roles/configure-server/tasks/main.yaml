@@ -1,17 +1,31 @@
----
-- name: "add node.js from nodesource"
-  become: true
-  shell: | 
-    curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+# ---
+# - name: "add node.js from nodesource"
+#   become: true
+#   shell: | 
+#     curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
   
-- name: "install node.js 12"
-  become: true
-  apt: 
-    name: ["nodejs"]
-    state: latest
-    update_cache: yes
+# - name: "install node.js 12"
+#   become: true
+#   apt: 
+#     name: ["nodejs"]
+#     state: latest
+#     update_cache: yes
 
-- name: "install PM2 globally"
+# - name: "install PM2 globally"
+#   npm:
+#     name: pm2
+#     global: yes
+
+---
+
+- name: "add node LTS version and NVM , then using node 13.8.0 version"
+  become: true
+  shell: |
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+    sudo apt install -y nodejs
+    sudo npm install -g n
+    sudo n 13.8.0
+- name: "install pm2"
   npm:
     name: pm2
     global: yes
