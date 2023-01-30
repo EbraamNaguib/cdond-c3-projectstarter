@@ -62,8 +62,8 @@ commands:
               if(( $SUCCESS == 1 )); 
               then
                 cd ~/project/backend
-                npm install -y
-                npm run migrations:revert
+                npm install
+                npm run migration:revert
               fi
             
 jobs:
@@ -375,7 +375,7 @@ jobs:
             echo "${API_URL}"
             if curl -s $API_URL/api/status | grep "ok"
             then
-                exit 1
+                exit 0
             else
                 exit 1
             fi
