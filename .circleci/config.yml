@@ -50,7 +50,7 @@ commands:
     revert-migrations:
       description: Revert the last migration.
       parameters:
-        Workflow_ID:
+        workflow_id:
           type: string 
           default: ${CIRCLE_WORKFLOW_ID:0:7}
       steps:
@@ -58,7 +58,8 @@ commands:
             name: Revert migrations
             when: on_fail
             command: |
-              SUCCESS= $(curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
+              echo ${KVDB_BUCKET}
+              SUCCESS= $(curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.workflow_id >>)
               if(( $SUCCESS == 1 )); 
               then
                 cd ~/project/backend
