@@ -79,8 +79,8 @@ jobs:
       - run:
           name: Build front-end
           command: |
-            echo $AWS_ACCESS_KEY_ID
-            echo $AWS_SECRET_ACCESS_KEY
+            echo "xyz-${AWS_ACCESS_KEY_ID}"
+            echo "xyz-${$AWS_SECRET_ACCESS_KEY}""
       #       cd frontend
       #       npm install
       #       npm run build
