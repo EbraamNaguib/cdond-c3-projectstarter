@@ -283,8 +283,6 @@ jobs:
             echo "API_URL=http://${BACKEND_IP}:3030" >> frontend/.env
             cat frontend/.env
             
-            # export API_URL="http://${BACKEND_IP}:3030"
-            # echo "${API_URL}"
 
       - run:
           name: Deploy frontend objects
@@ -339,7 +337,7 @@ jobs:
             export TYPEORM_MIGRATIONS=./migrations/*.ts
 
             cd .circleci/ansible
-            echo "Contents  of the inventory.txt file is -------"
+            echo "Contents  of the inventory.txt file is --------"
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
       
