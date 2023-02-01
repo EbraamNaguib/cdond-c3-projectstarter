@@ -1,0 +1,11 @@
+groups:
+- name: Down
+  rules:
+  - alert: InstanceDown
+    expr: up == 0
+    for: 1m
+    labels:
+      severity: 'critical'
+    annotations:
+      summary: "Instance {{ $labels.private_dns_name }} :9100/metrices  is down "
+      description: "Instance {{ $labels.instance }} with private dns name: {{ $labels.private_dns_name }} of job  {{ $labels.job }} has been down for more than 2 minutes."
